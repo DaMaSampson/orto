@@ -2,7 +2,7 @@
 const siteMetadata = {
   title: 'Open Research Tools for Ophthalmology',
   author: 'ORT',
-  headerTitle: 'ORT Blog',
+  headerTitle: 'Open Research Tools',
   description: 'Description',
   language: 'en-us',
   theme: 'system', // system, dark or light

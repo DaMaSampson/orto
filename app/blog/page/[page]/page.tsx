@@ -4,6 +4,7 @@ import { allBlogs } from 'contentlayer/generated'
 
 const POSTS_PER_PAGE = 5
 
+// Prerender only these params at build time, others will be server-rendered on-demand.
 export const generateStaticParams = async () => {
   const totalPages = Math.ceil(allBlogs.length / POSTS_PER_PAGE)
   const paths = Array.from({ length: totalPages }, (_, i) => ({ page: (i + 1).toString() }))

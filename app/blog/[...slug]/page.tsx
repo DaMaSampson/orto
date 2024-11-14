@@ -73,6 +73,7 @@ export async function generateMetadata(props: {
   }
 }
 
+// Prerender only these params at build time, others will be server-rendered on-demand.
 export const generateStaticParams = async () => {
   return allBlogs.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
 }

@@ -25,6 +25,7 @@ export async function generateMetadata(props: {
   })
 }
 
+// Prerender only these params at build time, others will be server-rendered on-demand.
 export const generateStaticParams = async () => {
   const tagCounts = tagData as Record<string, number>
   const tagKeys = Object.keys(tagCounts)
