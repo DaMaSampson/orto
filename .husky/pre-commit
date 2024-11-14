@@ -1,1 +1,0 @@
-DEBUG=husky:* npx --no-install lint-staged
