@@ -38,9 +38,7 @@ const Header = () => {
             <Logo />
           </div>
           {typeof siteMetadata.headerTitle === 'string' ? (
-            <div className="hidden text-2xl font-semibold sm:block">
-              {siteMetadata.headerTitle}
-            </div>
+            <div className="hidden text-2xl font-semibold sm:block">{siteMetadata.headerTitle}</div>
           ) : (
             siteMetadata.headerTitle
           )}
@@ -71,7 +69,7 @@ const Header = () => {
                     <Link
                       key={sublink.title}
                       href={sublink.href}
-                      className="block font-medium px-4 py-2 text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-400"
+                      className="block px-4 py-2 font-medium text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-400"
                     >
                       {sublink.title}
                     </Link>
