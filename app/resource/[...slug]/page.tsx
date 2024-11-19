@@ -30,7 +30,7 @@ export default async function Projects(props: { params: Promise<{ slug: string[]
       {resourcePost.data.map((resourceList) => (
         <div key={resourceList.title} className="divide-y divide-gray-200 dark:divide-gray-700">
           <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-            <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            <p className="text-2xl leading-7 text-primary-500 dark:text-primary-400">
               {resourceList.title}
             </p>
           </div>

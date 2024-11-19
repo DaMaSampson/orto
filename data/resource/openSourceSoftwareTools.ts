@@ -15,7 +15,14 @@ const resourceData1: Resource[] = [
   },
 ]
 
-const resourceData2: Resource[] = []
+const resourceData2: Resource[] = [
+  {
+    title: 'DEMO',
+    description: `For demonstration purposes, here are some example descriptions`,
+    imgSrc: '/static/images/time-machine.jpg',
+    href: '/blog/the-time-machine',
+  },
+]
 
 const resourceListData: ResourceList[] = [
   {
