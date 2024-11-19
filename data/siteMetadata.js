@@ -1,8 +1,8 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'Open Research Tools for Ophthalmology',
-  author: 'ORT',
-  headerTitle: 'Open Research Tools',
+  author: 'ORTO',
+  headerTitle: 'Open Research Tools for Ophthalmology',
   description: 'Description',
   language: 'en-us',
   theme: 'system', // system, dark or light

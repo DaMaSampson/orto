@@ -2,7 +2,7 @@ import Image from './Image'
 import Link from './Link'
 
 const Card = ({ title, description, imgSrc, href }) => (
-  <div className="md max-w-[544px] p-4 md:w-1/2">
+  <div className="md p-4">
     <div
       className={`${
         imgSrc && 'h-full'
@@ -15,7 +15,7 @@ const Card = ({ title, description, imgSrc, href }) => (
               alt={title}
               src={imgSrc}
               className="object-cover object-center md:h-36 lg:h-48"
-              width={544}
+              width={1020}
               height={306}
             />
           </Link>
@@ -24,12 +24,12 @@ const Card = ({ title, description, imgSrc, href }) => (
             alt={title}
             src={imgSrc}
             className="object-cover object-center md:h-36 lg:h-48"
-            width={544}
+            width={1020}
             height={306}
           />
         ))}
       <div className="p-6">
-        <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
+        <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight text-primary-400">
           {href ? (
             <Link href={href} aria-label={`Link to ${title}`}>
               {title}
@@ -38,7 +38,7 @@ const Card = ({ title, description, imgSrc, href }) => (
             title
           )}
         </h2>
-        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{description}</p>
+        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-100">{description}</p>
         {href && (
           <Link
             href={href}
