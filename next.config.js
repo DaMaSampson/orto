@@ -75,7 +75,7 @@ module.exports = () => {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'picsum.photos',
+          hostname: '*',
         },
       ],
       unoptimized,

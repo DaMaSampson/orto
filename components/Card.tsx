@@ -38,7 +38,11 @@ const Card = ({ title, description, imgSrc, href }) => (
             title
           )}
         </h2>
-        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-100">{description}</p>
+        {/* <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-100">{description}</p> */}
+        <p
+          className="prose mb-3 max-w-none text-gray-500 dark:text-gray-100"
+          dangerouslySetInnerHTML={{ __html: description }}
+        ></p>
         {href && (
           <Link
             href={href}
