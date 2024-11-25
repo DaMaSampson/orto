@@ -78,6 +78,27 @@ function createTagCount(allBlogs) {
   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
 }
 
+/**
+ * Count the occurrences of all topics across publications and write to json file
+ */
+function createTopicCount(allTopics) {
+  const topicCount: Record<string, number> = {}
+  allTopics.forEach((file) => {
+    if (file.topics && (!isProduction || file.draft !== true)) {
+      file.topics.forEach((topic) => {
+        const formattedTopic = slug(topic)
+        if (formattedTopic in topicCount) {
+          topicCount[formattedTopic] += 1
+        } else {
+          topicCount[formattedTopic] = 1
+        }
+      })
+    }
+  })
+  writeFileSync('./app/topic-data.json', JSON.stringify(topicCount))
+}
+
+// TODO maybe include publications/topics in the future
 function createSearchIndex(allBlogs) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
@@ -126,6 +147,26 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
+export const Publication = defineDocumentType(() => ({
+  name: 'Publication',
+  filePathPattern: 'publication/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    authors: { type: 'string', required: true },
+    year: { type: 'number' },
+    topics: { type: 'list', of: { type: 'string' }, default: [] },
+    draft: { type: 'boolean' },
+    doi: { type: 'string' },
+    pmid: { type: 'string' },
+  },
+  computedFields: {
+    code: { // expose code for rendering content in list layout
+      type: 'string',
+      resolve: (doc) => doc.body?.code
+    },
+  },
+}))
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -148,7 +189,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Publication, Authors],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -179,8 +220,9 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
+    const { allBlogs, allPublications } = await importData()
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
+    createTopicCount(allPublications)
   },
 })
