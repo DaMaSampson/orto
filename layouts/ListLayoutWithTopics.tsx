@@ -123,14 +123,14 @@ export default function ListLayoutWithTopics({
           <div>
             <ul>
               {displayPosts.map((post) => {
-                let { authors, year, code, topics, doi, pmid } = post
+                const { authors, year, code, topics, doi, pmid } = post
                 return (
                   <li key={doi} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <div className="space-y-3">
                         <div>
                           <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                            {authors} ({year}) 
+                            {authors} ({year})
                           </div>
                           <MDXLayoutRenderer code={code} />
                           <div className="flex flex-wrap">
