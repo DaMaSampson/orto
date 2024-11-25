@@ -123,9 +123,9 @@ export default function ListLayoutWithTopics({
           <div>
             <ul>
               {displayPosts.map((post) => {
-                let { _id, authors, year, code, topics, doi, pmid } = post
+                let { authors, year, code, topics, doi, pmid } = post
                 return (
-                  <li key={_id} className="py-5">
+                  <li key={doi} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <div className="space-y-3">
                         <div>
