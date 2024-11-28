@@ -3,12 +3,10 @@
 
 import { usePathname } from 'next/navigation'
 import { slug } from 'github-slugger'
-import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Publication } from 'contentlayer/generated'
 import Link from '@/components/Link'
+import Button from '@/components/Button'
 import Topic from '@/components/Topic'
-import siteMetadata from '@/data/siteMetadata'
 import topicData from 'app/topic-data.json'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 
@@ -88,13 +86,13 @@ export default function ListLayoutWithTopics({
           <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-gray-900/70 dark:shadow-gray-800/40 sm:flex">
             <div className="px-6 py-4">
               {pathname.startsWith('/publication') ? (
-                <h3 className="font-bold uppercase text-primary-500">All Posts</h3>
+                <h3 className="font-bold uppercase text-primary-500">All Topics</h3>
               ) : (
                 <Link
                   href={`/publication`}
                   className="font-bold uppercase text-gray-700 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500"
                 >
-                  All Posts
+                  All Topics
                 </Link>
               )}
               <ul>
@@ -139,20 +137,20 @@ export default function ListLayoutWithTopics({
                         </div>
                         <div className="flex flex-wrap">
                           {doi && (
-                            <Link
+                            <Button
                               href={doi}
-                              className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              className="mr-3 text-sm font-medium uppercase"
                             >
                               DOI
-                            </Link>
+                            </Button>
                           )}
                           {pmid && (
-                            <Link
+                            <Button
                               href={pmid}
-                              className="mr-3 text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              className="mr-3 text-sm font-medium uppercase"
                             >
                               PMID
-                            </Link>
+                            </Button>
                           )}
                         </div>
                       </div>
