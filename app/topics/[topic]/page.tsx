@@ -6,6 +6,7 @@ import topicData from 'app/topic-data.json'
 import { genPageMetadata } from 'app/seo'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { sortPosts } from 'pliny/utils/contentlayer'
 
 export async function generateMetadata(props: {
   params: Promise<{ topic: string }>
@@ -39,8 +40,7 @@ export default async function TopicPage(props: { params: Promise<{ topic: string
   const topic = decodeURI(params.topic)
   // Capitalize first letter and convert space to dash
   const title = topic[0].toUpperCase() + topic.split(' ').join('-').slice(1)
-  console.log(allPublications, topic);
-  const filteredPosts = allPublications.filter((post) => post.topics && post.topics.map((t) => slug(t)).includes(topic))
+  const filteredPosts = sortPosts(allPublications.filter((post) => post.topics && post.topics.map((t) => slug(t)).includes(topic)))
   if (filteredPosts.length === 0) {
     return notFound()
   }

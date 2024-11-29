@@ -153,6 +153,7 @@ export const Publication = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     authors: { type: 'string', required: true },
+    date: { type: 'date', required: true },
     year: { type: 'number' },
     topics: { type: 'list', of: { type: 'string' }, default: [] },
     draft: { type: 'boolean' },
