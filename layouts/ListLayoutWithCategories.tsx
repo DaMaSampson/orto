@@ -122,7 +122,7 @@ export default function ListLayoutWithCategories({
             </div>
           </div>
           <div>
-            <ul>
+            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
               {displayPosts.map((post, index) => {
                 const { title, code, href } = post
                 return (
@@ -130,18 +130,16 @@ export default function ListLayoutWithCategories({
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <div className="space-y-3">
                         <div>
-                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                          <div className="text-2xl mb-2 text-primary-500 dark:text-primary-400">
                             {title}
                           </div>
                           <MDXLayoutRenderer code={code} />
                         </div>
-                        <div className="flex flex-wrap">
-                          {href && (
-                            <Link href={href} className="mr-3 text-sm font-medium">
-                              Learn More -&gt;
-                            </Link>
-                          )}
-                        </div>
+                        {href && (
+                          <Link href={href} className="text-sm font-medium text-primary-400">
+                            Learn More -&gt;
+                          </Link>
+                        )}
                       </div>
                     </article>
                   </li>
