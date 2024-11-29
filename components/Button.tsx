@@ -49,5 +49,4 @@ const CustomButton = ({ href, style, className, ...rest }: CustomButtonProps) =>
   return <button style={style} className={mergedClassName} {...rest} />
 }
 
-
 export default CustomButton

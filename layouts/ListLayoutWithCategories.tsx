@@ -15,8 +15,8 @@ interface PaginationProps {
 }
 interface ListLayoutProps {
   posts: Resource[]
-  title: string,
-  category: string,
+  title: string
+  category: string
   topic?: string
   initialDisplayPosts?: Resource[]
   pagination?: PaginationProps
@@ -137,11 +137,8 @@ export default function ListLayoutWithCategories({
                         </div>
                         <div className="flex flex-wrap">
                           {href && (
-                            <Link
-                              href={href}
-                              className="mr-3 text-sm font-medium"
-                            >
-                              Learn More ->
+                            <Link href={href} className="mr-3 text-sm font-medium">
+                              Learn More -&gt;
                             </Link>
                           )}
                         </div>

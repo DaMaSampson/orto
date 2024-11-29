@@ -31,13 +31,16 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
   // Capitalize first letter and convert space to dash
   const title = category[0].toUpperCase() + category.split(' ').join('-').slice(1)
 
-  const filteredPosts = sortPosts(allResources.filter((post) => {
-    if (post.category) {
-      let hypenatedCategory = post.category.split(' ').join('-').toLowerCase()
-      return hypenatedCategory == category
-    }
-    return false;
-  }));
+  const filteredPosts = sortPosts(
+    allResources.filter((post) => {
+      if (post.category) {
+        const hypenatedCategory = post.category.split(' ').join('-').toLowerCase()
+        return hypenatedCategory == category
+      }
+      return false
+    })
+  )
+
   if (filteredPosts.length === 0) {
     return notFound()
   }

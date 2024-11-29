@@ -25,21 +25,25 @@ export async function generateMetadata(props: {
   })
 }
 
-export default async function CategoryPage(props: { params: Promise<{ category: string, topic: string }> }) {
+export default async function CategoryPage(props: {
+  params: Promise<{ category: string; topic: string }>
+}) {
   const params = await props.params
   const category = decodeURI(params.category)
   const topic = decodeURI(params.topic)
   // Capitalize first letter and convert space to dash
   const title = category[0].toUpperCase() + category.split(' ').join('-').slice(1)
 
-  const filteredPosts = sortPosts(allResources.filter((post) => {
-    if (post.category && post.topic) {
-      let hypenatedCategory = post.category.split(' ').join('-').toLowerCase()
-      let hypenatedTopic = post.topic.split(' ').join('-').toLowerCase()
-      return hypenatedCategory == category && hypenatedTopic == topic
-    }
-    return false;
-  }));
+  const filteredPosts = sortPosts(
+    allResources.filter((post) => {
+      if (post.category && post.topic) {
+        const hypenatedCategory = post.category.split(' ').join('-').toLowerCase()
+        const hypenatedTopic = post.topic.split(' ').join('-').toLowerCase()
+        return hypenatedCategory == category && hypenatedTopic == topic
+      }
+      return false
+    })
+  )
   if (filteredPosts.length === 0) {
     return notFound()
   }

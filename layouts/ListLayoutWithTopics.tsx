@@ -137,18 +137,12 @@ export default function ListLayoutWithTopics({
                         </div>
                         <div className="flex flex-wrap">
                           {doi && (
-                            <Button
-                              href={doi}
-                              className="mr-3 text-sm font-medium uppercase"
-                            >
+                            <Button href={doi} className="mr-3 text-sm font-medium uppercase">
                               DOI
                             </Button>
                           )}
                           {pmid && (
-                            <Button
-                              href={pmid}
-                              className="mr-3 text-sm font-medium uppercase"
-                            >
+                            <Button href={pmid} className="mr-3 text-sm font-medium uppercase">
                               PMID
                             </Button>
                           )}
