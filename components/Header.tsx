@@ -12,7 +12,7 @@ import SearchButton from './SearchButton'
 const Header = () => {
   const [activeIndex, setActiveIndex] = useState(null)
   const [activeSubIndex, setActiveSubIndex] = useState(null)
-  const menuRef = useRef<HTMLDivElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null)
 
   const handleMainClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index) // Toggle main dropdown
@@ -25,25 +25,24 @@ const Header = () => {
   }
 
   const resetMenu = () => {
-    setActiveIndex(null);
-    setActiveSubIndex(null);
-  };
+    setActiveIndex(null)
+    setActiveSubIndex(null)
+  }
 
   // Hide dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        resetMenu();
+        resetMenu()
       }
-    };
+    }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
-  
   const headerClass = `flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10 overflow-visible ${
     siteMetadata.stickyNav ? 'sticky top-0 z-50' : ''
   }`
@@ -63,7 +62,10 @@ const Header = () => {
         </div>
       </Link>
       <div className="flex items-center space-x-6 leading-5 sm:space-x-8">
-        <div ref={menuRef} className="no-scrollbar hidden items-center space-x-4 overflow-visible sm:flex sm:space-x-6">
+        <div
+          ref={menuRef}
+          className="no-scrollbar hidden items-center space-x-4 overflow-visible sm:flex sm:space-x-6"
+        >
           {headerNavLinks.map((link, index) => (
             <div key={link.title} className="relative">
               {/* First Level Main Menu */}

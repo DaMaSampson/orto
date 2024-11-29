@@ -105,7 +105,6 @@ function createResourceCount(files) {
     }
   });
 
-  console.log(recordCount);
   writeFileSync(`./app/category-data.json`, JSON.stringify(recordCount));
 }
 

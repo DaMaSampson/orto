@@ -130,7 +130,7 @@ export default function ListLayoutWithCategories({
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <div className="space-y-3">
                         <div>
-                          <div className="text-2xl mb-2 text-primary-500 dark:text-primary-400">
+                          <div className="mb-2 text-2xl text-primary-500 dark:text-primary-400">
                             {title}
                           </div>
                           <MDXLayoutRenderer code={code} />
