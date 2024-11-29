@@ -9,12 +9,12 @@ const headerNavLinks = [
     //   { title: 'PROTOCOLS', href: '/tags/github' },
     // ]
   },
-  { href: '/resource',
+  { href: '/resource/open-source-software-tools',
     title: 'Resources',
     hrefs: [
-      { title: 'OPEN-SOURCE SOFTWARE TOOLS', href: '/resource/openSourceSoftwareTools' },
-      { title: 'OPEN-SOURCE DATABASES', href: '/resource/openSourceDatabases' },
-      { title: 'PROTOCOLS AND INITIATIVES', href: '/resource/protocolsAndInitiatives' },
+      { title: 'OPEN-SOURCE SOFTWARE TOOLS', href: '/resource/open-source-software-tools' },
+      { title: 'OPEN-SOURCE DATABASES', href: '/resource/open-source-databases' },
+      { title: 'PROTOCOLS AND INITIATIVES', href: '/resource/protocols-and-initiatives' },
     ]
   },
   { href: '/contact', title: 'Contact' },
