@@ -59,43 +59,54 @@ const computedFields: ComputedFields = {
 }
 
 /**
- * Count the occurrences of all tags across blog posts and write to json file
+ * Count the occurrences of all tags/topics across blog/publication and write to json file
  */
-function createTagCount(allBlogs) {
-  const tagCount: Record<string, number> = {}
-  allBlogs.forEach((file) => {
-    if (file.tags && (!isProduction || file.draft !== true)) {
-      file.tags.forEach((tag) => {
+function createRecordCount(files, type="tag") {
+  const attrName = `${type}s`
+  const recordCount: Record<string, number> = {}
+  files.forEach((file) => {
+    if (file[attrName] && (!isProduction || file.draft !== true)) {
+      file[attrName].forEach((tag) => {
         const formattedTag = slug(tag)
-        if (formattedTag in tagCount) {
-          tagCount[formattedTag] += 1
+        if (formattedTag in recordCount) {
+          recordCount[formattedTag] += 1
         } else {
-          tagCount[formattedTag] = 1
+          recordCount[formattedTag] = 1
         }
       })
     }
   })
-  writeFileSync('./app/tag-data.json', JSON.stringify(tagCount))
+  writeFileSync(`./app/${type}-data.json`, JSON.stringify(recordCount))
 }
 
 /**
- * Count the occurrences of all topics across publications and write to json file
+ * Count the occurrences of all topics across resources which has two layers of classification
  */
-function createTopicCount(allTopics) {
-  const topicCount: Record<string, number> = {}
-  allTopics.forEach((file) => {
-    if (file.topics && (!isProduction || file.draft !== true)) {
-      file.topics.forEach((topic) => {
-        const formattedTopic = slug(topic)
-        if (formattedTopic in topicCount) {
-          topicCount[formattedTopic] += 1
-        } else {
-          topicCount[formattedTopic] = 1
-        }
-      })
+function createResourceCount(files) {
+  const recordCount: Record<string, Record<string, number>> = {};
+
+  files.forEach((file) => {
+    // Skip draft files if in production
+    if (!isProduction || file.draft !== true) {
+      const formattedCategory = slug(file.category);
+      const formattedTopic = slug(file.topic);
+
+      // Ensure the category exists
+      if (!recordCount[formattedCategory]) {
+        recordCount[formattedCategory] = {};
+      }
+
+      // Ensure the topic exists
+      if (!recordCount[formattedCategory][formattedTopic]) {
+        recordCount[formattedCategory][formattedTopic] = 0;
+      }
+
+      recordCount[formattedCategory][formattedTopic] += 1;
     }
-  })
-  writeFileSync('./app/topic-data.json', JSON.stringify(topicCount))
+  });
+
+  console.log(recordCount);
+  writeFileSync(`./app/category-data.json`, JSON.stringify(recordCount));
 }
 
 // TODO maybe include publications/topics in the future
@@ -112,6 +123,7 @@ function createSearchIndex(allBlogs) {
   }
 }
 
+// Data model for news
 export const Blog = defineDocumentType(() => ({
   name: 'Blog',
   filePathPattern: 'blog/**/*.mdx',
@@ -147,6 +159,7 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
+// Data model for publications
 export const Publication = defineDocumentType(() => ({
   name: 'Publication',
   filePathPattern: 'publication/**/*.mdx',
@@ -168,6 +181,28 @@ export const Publication = defineDocumentType(() => ({
   },
 }))
 
+// Data model for resources
+export const Resource = defineDocumentType(() => ({
+  name: 'Resource',
+  filePathPattern: 'resource/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    topic: { type: 'string', required: true },
+    category: { type: 'string', required: true },
+    href: { type: 'string' },
+    draft: { type: 'boolean' },
+  },
+  computedFields: {
+    code: { // expose code for rendering content in list layout
+      type: 'string',
+      resolve: (doc) => doc.body?.code
+    },
+  },
+}))
+
+// data model for contact and people
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -190,7 +225,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Publication, Authors],
+  documentTypes: [Blog, Publication, Resource, Authors],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -221,9 +256,10 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs, allPublications } = await importData()
-    createTagCount(allBlogs)
+    const { allBlogs, allPublications, allResources } = await importData()
+    createRecordCount(allBlogs, "tag")
+    createRecordCount(allPublications, "topic")
+    createResourceCount(allResources)
     createSearchIndex(allBlogs)
-    createTopicCount(allPublications)
   },
 })
