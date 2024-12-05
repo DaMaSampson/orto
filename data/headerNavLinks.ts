@@ -41,22 +41,10 @@ const headerNavLinks = [
       {
         title: 'PROTOCOLS AND INITIATIVES',
         href: '/resource/protocols-and-initiatives',
-        hrefs: [
-          {
-            title: 'PROTOCOLS AND INITIATIVES',
-            href: '/resource/protocols-and-initiatives/protocols-and-initiatives',
-          },
-        ],
       },
       {
         title: 'OPEN-SCIENCE GENERAL RESOURCES',
         href: '/resource/open-science-general-resources',
-        hrefs: [
-          {
-            title: 'OPEN-SCIENCE GENERAL RESOURCES',
-            href: '/resource/open-science-general-resources/open-science-general-resources',
-          },
-        ],
       },
     ],
   },
