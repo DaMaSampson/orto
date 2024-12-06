@@ -1,3 +1,5 @@
+// The front page of the application, currently with content from 'About'
+
 import 'css/prism.css'
 import 'katex/dist/katex.css'
 
@@ -89,8 +91,10 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     return notFound()
   }
 
-  const prev = sortedCoreContents[postIndex + 1]
-  const next = sortedCoreContents[postIndex - 1]
+  // hide prev/next in front page
+  // const prev = sortedCoreContents[postIndex + 1]
+  // const next = sortedCoreContents[postIndex - 1]
+
   const post = allBlogs.find((p) => p.slug === slug) as Blog
   const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
@@ -114,7 +118,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
+      <Layout content={mainContent} authorDetails={authorDetails} showComments={false}>
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </Layout>
     </>
