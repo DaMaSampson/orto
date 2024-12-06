@@ -8,9 +8,12 @@ import headerNavLinks from '@/data/headerNavLinks'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [activeSubIndex, setActiveSubIndex] = useState<number | null>(null)
   const navRef = useRef(null)
 
   const onToggleNav = () => {
+    resetMenu()
     setNavShow((status) => {
       if (status) {
         enableBodyScroll(navRef.current)
@@ -20,6 +23,22 @@ const MobileNav = () => {
       }
       return !status
     })
+  }
+
+  const handleMainClick = (index) => {
+    setActiveIndex(activeIndex === index ? null : index) // Toggle main dropdown
+    setActiveSubIndex(null) // Close any open submenus
+  }
+
+  const handleSubClick = (subIndex) => {
+    // if there is no third menu, jump
+    setActiveSubIndex(activeSubIndex === subIndex ? null : subIndex) // Toggle sub-dropdown
+  }
+
+
+  const resetMenu = () => {
+    setActiveIndex(null)
+    setActiveSubIndex(null)
   }
 
   useEffect(() => {
@@ -72,15 +91,70 @@ const MobileNav = () => {
                 ref={navRef}
                 className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pl-12 pt-2 text-left"
               >
-                {headerNavLinks.map((link) => (
-                  <Link
-                    key={link.title}
-                    href={link.href}
-                    className="mb-4 py-2 pr-4 text-2xl font-bold tracking-widest text-gray-900 outline outline-0 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
-                    onClick={onToggleNav}
-                  >
-                    {link.title}
-                  </Link>
+                {headerNavLinks.map((link, index) => (
+                  <div key={link.title} className="mb-4">
+                    {/* First Level Menu */}
+                    {link.hrefs ? (
+                      <button
+                        onClick={() => handleMainClick(index)}
+                        className="w-full text-left text-2xl font-bold tracking-widest text-gray-900 outline outline-0 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+                      >
+                        {link.title}
+                      </button>
+                    ) : (
+                      <Link
+                        key={link.title}
+                        href={link.href}
+                        onClick={onToggleNav}
+                        className="w-full text-left text-2xl font-bold tracking-widest text-gray-900 outline outline-0 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
+                      >
+                        {link.title}
+                      </Link>
+                    )}
+
+           
+                    {link.hrefs && activeIndex === index && (
+                      <div className="ml-4 mt-2 space-y-2">
+                        {link.hrefs.map((secondLink, subIndex) => (
+                          <div key={secondLink.title}>
+                            {/* Second Level Menu */}
+                            {secondLink.hrefs ? (
+                              <button
+                                onClick={() => handleSubClick(subIndex)}
+                                className="block text-lg font-normal text-gray-600 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-400"
+                              >
+                                {secondLink.title}
+                              </button>
+                            ) : (
+                              <Link
+                                key={secondLink.title}
+                                href={secondLink.href}
+                                onClick={onToggleNav}
+                                className="block text-lg font-normal text-gray-600 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-400"
+                              >
+                                {secondLink.title}
+                              </Link>
+                            )}
+
+                            {secondLink.hrefs && activeSubIndex === subIndex && (
+                              <div className="ml-4 mt-2 space-y-2">
+                                {secondLink.hrefs.map((thirdLink) => (
+                                  <Link
+                                    key={thirdLink.title}
+                                    href={thirdLink.href}
+                                    onClick={onToggleNav}
+                                    className="block text-lg font-normal text-gray-600 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-400"
+                                  >
+                                    {thirdLink.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </nav>
 

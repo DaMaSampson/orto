@@ -10,8 +10,8 @@ import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 
 const Header = () => {
-  const [activeIndex, setActiveIndex] = useState(null)
-  const [activeSubIndex, setActiveSubIndex] = useState(null)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [activeSubIndex, setActiveSubIndex] = useState<number | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
 
   const handleMainClick = (index) => {
@@ -29,7 +29,7 @@ const Header = () => {
     setActiveSubIndex(null)
   }
 
-  // Hide dropdowns on outside click
+  // hide dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -68,7 +68,7 @@ const Header = () => {
         >
           {headerNavLinks.map((link, index) => (
             <div key={link.title} className="relative">
-              {/* First Level Main Menu */}
+              {/* First Level Menu */}
               {link.hrefs ? (
                 <button
                   onClick={() => handleMainClick(index)}
@@ -86,11 +86,11 @@ const Header = () => {
                 </Link>
               )}
 
-              {/* Second Level Dropdown */}
               {link.hrefs && activeIndex === index && (
                 <div className="absolute top-full z-50 mt-2 flex w-40 flex-col rounded-md bg-white shadow-lg dark:bg-gray-800">
                   {link.hrefs.map((secondLink, subIndex) => (
                     <div key={secondLink.title} className="relative">
+                      {/* Second Level Menu */}
                       {secondLink.hrefs ? (
                         <button
                           onClick={() => handleSubClick(subIndex)}
@@ -108,7 +108,7 @@ const Header = () => {
                         </Link>
                       )}
 
-                      {/* Third Level Dropdown */}
+                      {/* Third Level Menu */}
                       {secondLink.hrefs && activeSubIndex === subIndex && (
                         <div className="top-0 z-50 mt-0 flex w-40 flex-col rounded-md bg-white shadow-lg dark:bg-gray-800">
                           {secondLink.hrefs.map((thirdLink) => (
