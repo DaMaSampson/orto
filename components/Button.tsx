@@ -10,7 +10,7 @@ const CustomButton = ({ href, style, className, ...rest }: CustomButtonProps) =>
   const isAnchorLink = href && href.startsWith('#')
 
   // Combine incoming className with default classes
-  const mergedClassName = `px-3 py-1 dark:text-gray-100 bg-primary-500 hover:bg-primary-400 ${className || ''}`
+  const mergedClassName = `px-3 py-1 dark:text-gray-100 bg-primary-500 dark:bg-primary-600 hover:bg-primary-400 dark:hover:bg-primary-500 ${className || ''}`
 
   if (isInternalLink) {
     return (

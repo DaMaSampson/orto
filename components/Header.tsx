@@ -94,7 +94,7 @@ const Header = () => {
                       {secondLink.hrefs ? (
                         <button
                           onClick={() => handleSubClick(subIndex)}
-                          className="block w-full px-4 py-2 text-left font-medium text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-400"
+                          className="block w-full px-4 py-2 text-left font-medium text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-600"
                         >
                           {secondLink.title}
                         </button>
@@ -102,7 +102,7 @@ const Header = () => {
                         <Link
                           key={secondLink.title}
                           href={secondLink.href}
-                          className="block px-4 py-2 font-medium text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-400"
+                          className="block px-4 py-2 font-medium text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-600"
                         >
                           {secondLink.title}
                         </Link>
@@ -115,7 +115,7 @@ const Header = () => {
                             <Link
                               key={thirdLink.title}
                               href={thirdLink.href}
-                              className="block px-4 py-2 font-medium text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-400"
+                              className="block px-4 py-2 font-medium text-gray-700 hover:bg-primary-500 dark:text-gray-100 dark:hover:bg-primary-600"
                             >
                               &nbsp;&#10551;&nbsp;{thirdLink.title}
                             </Link>
