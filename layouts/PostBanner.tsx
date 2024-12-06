@@ -18,8 +18,13 @@ interface LayoutProps {
   prev?: { path: string; title: string }
 }
 
-
-export default function PostMinimal({ content, next, prev, showComments = true, children }: LayoutProps) {
+export default function PostMinimal({
+  content,
+  next,
+  prev,
+  showComments = true,
+  children,
+}: LayoutProps) {
   const { slug, title, images = true } = content
   const displayImage =
     images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'

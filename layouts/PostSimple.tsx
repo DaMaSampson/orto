@@ -12,12 +12,18 @@ import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 interface LayoutProps {
   content: CoreContent<Blog>
   children: ReactNode
-  showComments? : Boolean
+  showComments?: boolean
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
 }
 
-export default function PostLayout({ content, next, showComments = true, prev, children }: LayoutProps) {
+export default function PostLayout({
+  content,
+  next,
+  showComments = true,
+  prev,
+  children,
+}: LayoutProps) {
   const { path, slug, date, title } = content
 
   return (

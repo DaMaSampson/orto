@@ -35,7 +35,6 @@ const MobileNav = () => {
     setActiveSubIndex(activeSubIndex === subIndex ? null : subIndex) // Toggle sub-dropdown
   }
 
-
   const resetMenu = () => {
     setActiveIndex(null)
     setActiveSubIndex(null)
@@ -112,7 +111,6 @@ const MobileNav = () => {
                       </Link>
                     )}
 
-           
                     {link.hrefs && activeIndex === index && (
                       <div className="ml-4 mt-2 space-y-2">
                         {link.hrefs.map((secondLink, subIndex) => (
