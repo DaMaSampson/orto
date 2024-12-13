@@ -37,7 +37,7 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
         const hypenatedCategory = post.category.split(' ').join('-').toLowerCase()
         return hypenatedCategory == category
       }
-      return false
+      return process.env.NODE_ENV !== 'production' || !post.draft
     })
   )
 

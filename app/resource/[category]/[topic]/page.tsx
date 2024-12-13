@@ -41,7 +41,7 @@ export default async function CategoryPage(props: {
         const hypenatedTopic = post.topic.split(' ').join('-').toLowerCase()
         return hypenatedCategory == category && hypenatedTopic == topic
       }
-      return false
+      return process.env.NODE_ENV !== 'production' || !post.draft
     })
   )
   if (filteredPosts.length === 0) {

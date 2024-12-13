@@ -8,7 +8,9 @@ const POSTS_PER_PAGE = 100 // default
 export const metadata = genPageMetadata({ title: 'Publication' })
 
 export default function BlogPage() {
-  const posts = allPublications
+  const posts = sortPosts(
+    allPublications.filter((post) => process.env.NODE_ENV !== 'production' || !post.draft)
+  )
   const pageNumber = 1
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),

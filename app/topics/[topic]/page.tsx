@@ -41,7 +41,12 @@ export default async function TopicPage(props: { params: Promise<{ topic: string
   // Capitalize first letter and convert space to dash
   const title = topic[0].toUpperCase() + topic.split(' ').join('-').slice(1)
   const filteredPosts = sortPosts(
-    allPublications.filter((post) => post.topics && post.topics.map((t) => slug(t)).includes(topic))
+    allPublications.filter(
+      (post) =>
+        post.topics &&
+        post.topics.map((t) => slug(t)).includes(topic) &&
+        (process.env.NODE_ENV !== 'production' || !post.draft)
+    )
   )
   if (filteredPosts.length === 0) {
     return notFound()
