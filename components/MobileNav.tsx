@@ -12,6 +12,17 @@ const MobileNav = () => {
   const [activeSubIndex, setActiveSubIndex] = useState<number | null>(null)
   const navRef = useRef(null)
 
+  interface link {
+    href: string
+    title: string
+    hrefs?: baseLink[]
+  }
+
+  interface baseLink {
+    href: string
+    title: string
+  }
+
   const onToggleNav = () => {
     resetMenu()
     setNavShow((status) => {
@@ -90,7 +101,7 @@ const MobileNav = () => {
                 ref={navRef}
                 className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pl-12 pt-2 text-left"
               >
-                {headerNavLinks.map((link, index) => (
+                {headerNavLinks.map((link: link, index) => (
                   <div key={link.title} className="mb-4">
                     {/* First Level Menu */}
                     {link.hrefs ? (
@@ -113,7 +124,7 @@ const MobileNav = () => {
 
                     {link.hrefs && activeIndex === index && (
                       <div className="ml-4 mt-2 space-y-2">
-                        {link.hrefs.map((secondLink, subIndex) => (
+                        {link.hrefs.map((secondLink: link, subIndex) => (
                           <div key={secondLink.title}>
                             {/* Second Level Menu */}
                             {secondLink.hrefs ? (

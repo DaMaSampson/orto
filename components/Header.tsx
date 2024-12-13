@@ -14,6 +14,17 @@ const Header = () => {
   const [activeSubIndex, setActiveSubIndex] = useState<number | null>(null)
   const menuRef = useRef<HTMLDivElement | null>(null)
 
+  interface link {
+    href: string
+    title: string
+    hrefs?: baseLink[]
+  }
+
+  interface baseLink {
+    href: string
+    title: string
+  }
+
   const handleMainClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index) // Toggle main dropdown
     setActiveSubIndex(null) // Close any open submenus
@@ -66,7 +77,7 @@ const Header = () => {
           ref={menuRef}
           className="no-scrollbar hidden items-center space-x-4 overflow-visible sm:flex sm:space-x-6"
         >
-          {headerNavLinks.map((link, index) => (
+          {headerNavLinks.map((link: link, index) => (
             <div key={link.title} className="relative">
               {/* First Level Menu */}
               {link.hrefs ? (
@@ -88,7 +99,7 @@ const Header = () => {
 
               {link.hrefs && activeIndex === index && (
                 <div className="absolute top-full z-50 mt-2 flex w-40 flex-col rounded-md bg-white shadow-lg dark:bg-gray-800">
-                  {link.hrefs.map((secondLink, subIndex) => (
+                  {link.hrefs.map((secondLink: link, subIndex) => (
                     <div key={secondLink.title} className="relative">
                       {/* Second Level Menu */}
                       {secondLink.hrefs ? (
