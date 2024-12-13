@@ -1,5 +1,24 @@
 # Open Research Tools for Ophthalmology
 
+## Prerequisites
+Install node.js
+https://nodejs.org/en/download/package-manager
+It is advised to install version 20.x as that's what has been used in production.
+
+Install yarn
+```bash
+npm install --global yarn
+```
+
+Please make sure your IDE has End of Line set to LF rather than CRLF
+
+## Guide
+next.js https://nextjs.org/docs
+tailwind.css https://tailwindcss.com/docs/installation
+mdx https://mdxjs.com/docs/
+contentlayer https://contentlayer.dev/docs/getting-started-cddd76b7
+react.js https://react.dev/learn
+
 ## Installation
 
 ```bash
@@ -69,28 +88,20 @@ Please refer to `contentlayer.config.ts` for an up to date list of supported fie
 title (required)
 date (required)
 tags (optional)
-lastmod (optional)
 draft (optional)
 summary (optional)
 images (optional)
 authors (optional list which should correspond to the file names in `data/authors`. Uses `default` if none is specified)
 layout (optional list which should correspond to the file names in `data/layouts`)
-canonicalUrl (optional, canonical url for the post for SEO)
 ```
 
-Here's an example of a post's frontmatter:
+### Production & Maintainance
+The application is hosted on Vercel, user demographics is recorded by Google Analytics and comments are hosted as discussions in the Github repository.
 
-```
----
-title: 'Introducing Tailwind Nexjs Starter Blog'
-date: '2021-01-12'
-lastmod: '2021-01-18'
-tags: ['next-js', 'tailwind', 'guide']
-draft: false
-summary: 'Looking for a performant, out of the box template, with all the best in web technology to support your blogging needs? Checkout the Tailwind Nextjs Starter Blog template.'
-images: ['/static/images/canada/mountains.jpg', '/static/images/canada/toronto.jpg']
-authors: ['default', 'sparrowhawk']
-layout: PostLayout
-canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-tailwind-nextjs-starter-blog
----
-```
+Vercel Deployment https://vercel.com/
+Google Analytics https://analytics.google.com/analytics/web/
+Github Comments https://github.com/LDY681/orto/discussions
+
+### Future Integration
+After a domain is acquired, it it advised to set up a CDN for fast access and content protection, Cloudfare offers a free plan which comes with caching, DDos protection and bot detection.
+https://www.cloudflare.com/en-au/
