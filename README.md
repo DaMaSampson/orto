@@ -1,4 +1,4 @@
-# Open Research Tools for Ophthalmology
+# Open Research Tools for Ophthalmology (ORTO)
 
 ## Prerequisites
 Install node.js
